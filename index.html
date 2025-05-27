@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Paleta de Colores Mejorado</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tweakpane@4.0.4/dist/tweakpane.min.js"></script>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Potencia tu marca con colores atractivos</h1>
+        <p>Estudios Ivality tiene la combinación perfecta para tu sitio web ¡TOTALMENTE PERSONALIZABLE!</p>
+    </div>
+    
+    <div class="controls">
+        <div class="palette-selector">
+            <button class="palette-button active" data-palette="grises">Grises</button>
+            <button class="palette-button" data-palette="azules">Azules</button>
+            <button class="palette-button" data-palette="verdes">Verdes</button>
+            <button class="palette-button" data-palette="rojos">Rojos</button>
+            <button class="palette-button" data-palette="morados">Morados</button>
+            <button class="palette-button" data-palette="arcoiris">Arcoíris</button>
+            <button class="palette-button" data-palette="calidos">Cálidos</button>
+            <button class="palette-button" data-palette="frios">Fríos</button>
+        </div>
+        
+        <button class="theme-toggle" id="themeToggle">🌙 Cambiar Tema</button>
+
+    </div>
+    
+    <div class="container">
+        <h2 class="palette-title">grises</h2>
+        <ul class="swatches"></ul>
+    </div>
+    
+    <!-- Custom Colors Section -->
+    <div class="custom-section">
+        <h2>🎨 Colores Personalizados</h2>
+        
+        <div class="color-creator">
+            <div class="color-input-group">
+                <label for="colorPicker">Seleccionar Color</label>
+                <input type="color" id="colorPicker" class="color-picker" value="#ff6b6b" aria-label="Selector de color">
+            </div>
+            
+            <button class="add-color-btn" id="addColorBtn">
+                ➕ Agregar Color
+            </button>
+            
+            <button class="clear-custom-btn" id="clearCustomBtn">
+                🗑️ Limpiar Todo
+            </button>
+        </div>
+        
+        <ul class="custom-colors" id="customColors"></ul>
+    </div>
+    
+    <div class="color-modal" id="colorModal" aria-hidden="true">
+        <div class="modal-content">
+            <div class="color-preview"></div>
+            <div class="color-formats">
+                <div class="color-format">
+                    <span class="format-label">HEX</span>
+                    <span class="format-value hex-value">#000000</span>
+                    <button class="copy-button" data-format="hex">Copiar</button>
+                </div>
+                <div class="color-format">
+                    <span class="format-label">RGB</span>
+                    <span class="format-value rgb-value">rgb(0, 0, 0)</span>
+                    <button class="copy-button" data-format="rgb">Copiar</button>
+                </div>
+                <div class="color-format">
+                    <span class="format-label">HSL</span>
+                    <span class="format-value hsl-value">hsl(0, 0%, 0%)</span>
+                    <button class="copy-button" data-format="hsl">Copiar</button>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="close-modal" id="closeModalBtn">Cerrar</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">¡Color copiado al portapapeles!</div>
+
+    <script src="script.js"></script>
+    <script>
+    // Al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = '☀️ Modo Claro';
+    }
+});
+
+themeToggle.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        themeToggle.textContent = '🌙 Cambiar Tema';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        themeToggle.textContent = '☀️ Modo Claro';
+    }
+});
+
+    </script>
+
+</body>
+</html>
